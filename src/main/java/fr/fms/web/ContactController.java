@@ -106,4 +106,18 @@ public class ContactController {
     }
 
 
+    @GetMapping("/contact")
+    public String contact(Model model){
+
+        model.addAttribute("contact" , new Contact());
+        try {
+            model.addAttribute("categories",businessImpl.getCatogries());
+        } catch (Exception e) {
+            model.addAttribute("error",e.getMessage());
+
+        }
+
+        return "contact";
+    }
+
 }

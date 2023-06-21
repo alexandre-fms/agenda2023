@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title th:text="${message}"></title>
+    <link rel="stylesheet" 			href="../static/css/bootstrap.min.css"	th:href="@{css/bootstrap.min.css}">
+    <link rel="stylesheet" 			href="../static/css/style.css"			th:href="@{css/style.css}">
+    <link rel="stylesheet" 			type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"/>
+</head>
+<body>
+<table border="1">
+    <tr><td>Error Message</td><td th:text="${message}"></td></tr>
+    <tr><td>Status Code</td><td th:text="${status}"></td></tr>
+    <tr><td>Exception</td><td th:text="${exception}"></td></tr>
+    <tr><td>Stacktrace</td><td><pre th:text="${trace}"></pre></td></tr>
+    <tr><td>Binding Errors</td><td th:text="${errors}"></td></tr>
+</table>
+</body>
+</html>
