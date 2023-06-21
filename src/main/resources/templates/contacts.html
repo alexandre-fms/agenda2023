@@ -46,16 +46,13 @@
                         <td th:text="${a.firstname}"> </td>
                         <td text="en attente"> </td>
 
-<!--                        <td> <a class="btn btn-secondary" th:href="@{ /acart (id=${a.id} , page=${currentPage} , keyword=${keyword} , idCat=${idCat}) }">-->
-<!--                            <i class="fa fa-shopping-cart"></i> Add/Cart </a> </td>-->
+                        <td sec:authorize="hasRole('ROLE_ADMIN')">								  									<!-- après une suppression, pour garder le même contexte ou page -->
+                            <a class="btn btn-danger" onclick="return confirm('Are you sure ?')" th:href="@{ /delete (id=${a.id} , page=${currentPage} , keyword=${keyword} , idCat=${idCat} ) }" >Delete</a>
+                        </td>
 
-<!--                        <td sec:authorize="hasRole('ROLE_ADMIN')">								  									&lt;!&ndash; après une suppression, pour garder le même contexte ou page &ndash;&gt;-->
-<!--                            <a class="btn btn-danger" onclick="return confirm('Are you sure ?')" th:href="@{ /delete (id=${a.id} , page=${currentPage} , keyword=${keyword} , idCat=${idCat} ) }" >Delete</a>-->
-<!--                        </td>-->
-
-<!--                        <td sec:authorize="hasRole('ROLE_ADMIN')">-->
-<!--                            <a class="btn btn-info" th:href="@{ /edit (id=${a.id}) }" >Edit</a>-->
-<!--                        </td>-->
+                        <td sec:authorize="hasRole('ROLE_ADMIN')">
+                            <a class="btn btn-info" th:href="@{ /edit (id=${a.id}) }" >Edit</a>
+                        </td>
                     </tr>
                 </table>
 

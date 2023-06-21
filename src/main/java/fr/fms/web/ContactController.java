@@ -6,8 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
 
 @Controller
 public class ContactController {
@@ -26,7 +31,7 @@ public class ContactController {
                 //if(contacts.isEmpty())
                     //model.addAttribute("error", ManageErrors.STR_ERROR);
             }
-            else contacts = businessImpl.getArticlesPages(kw,page);
+            else contacts = businessImpl.getContactsPages(kw,page);
 
             model.addAttribute("idCat",idCat);
             model.addAttribute("listContact",contacts.getContent());
@@ -55,6 +60,49 @@ public class ContactController {
 
 
         return "Contacts";
+    }
+
+
+    @GetMapping("/delete")
+    public String delete(Long id, int page, String keyword , Long idCat, RedirectAttributes redirectAttrs) {
+        try {
+            businessImpl.deleteContact(id);
+        } catch (Exception e) {
+            redirectAttrs.addAttribute("error",e.getMessage());
+            //logger.error("[ARTICLE CONTROLLER : DELETE] : {} " , e.getMessage());
+        }
+        return "redirect:/index?page="+page+"&keyword="+keyword + "&idCat=" + idCat;
+    }
+
+
+    @GetMapping("/edit")
+    public String edit(Long id, Model model) {
+        Contact contact;
+        try {
+            contact = businessImpl.getContactById(id);
+            model.addAttribute("categories",businessImpl.getCatogries());
+            model.addAttribute("contact", contact);
+        } catch (Exception e) {
+            model.addAttribute("error",e.getMessage());
+            //logger.error("[ARTICLE CONTROLLER : EDIT] : {} " , e.getMessage());
+        }
+        return "edit";
+    }
+
+    @PostMapping("/save")
+    public String save(@Valid Contact contact, BindingResult bindingResult, Model model, RedirectAttributes redirectAttrs) {
+        try {
+            if(bindingResult.hasErrors()) {
+                model.addAttribute("categories",businessImpl.getCatogries());
+                return "contact";
+            }
+            businessImpl.saveContact(contact);
+        }
+        catch(Exception e) {
+            redirectAttrs.addAttribute("error",e.getMessage());
+            //logger.error("[ARTICLE CONTROLLER : SAVE ARTICLE] : {} " , e.getMessage());
+        }
+        return "redirect:/index";
     }
 
 

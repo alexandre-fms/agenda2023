@@ -8,7 +8,13 @@ import org.springframework.stereotype.Service;
 public interface IntBusiness {
     public Page<Contact> getContactsByCategoriePage(Long idCat, int page) throws Exception;
 
-    Page<Contact> getArticlesPages(String kw, int page);
+    public Page<Contact> getContactsPages(String kw, int page) throws Exception;
 
     Object getCatogries();
+
+    void deleteContact(Long id);
+
+    Contact getContactById(Long id);
+
+    void saveContact(Contact contact);
 }

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>gestion contact</title>
+
+    <link rel="stylesheet" 			href="../static/css/bootstrap.min.css"	th:href="@{css/bootstrap.min.css}">
+    <link rel="stylesheet" 			href="../static/css/style.css"			th:href="@{css/style.css}">
+    <link rel="stylesheet" 			type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"/>
+</head>
+
+<body>
+<div layout:fragment="content">
+    <div class="col-md-4 col-xs-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">Mettre à jour un contact</div>
+            <div class="panel-body">
+                <form th:action="@{/save}" method="post">
+                    <div class="form-group">
+                        <label class="control-label"> Id :  </label> <label th:text=${contact.id}></label>
+                        <input class="form-control" type="hidden" name="id" th:value="${contact.id}">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label"> nom : </label>
+                        <input class="form-control" type="text" name="brand" th:value="${contact.name}">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label"> prènom : </label>
+                        <input class="form-control" type="text" name="description" th:value="${contact.firstname}">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label"> numéro : </label>
+                        <input class="form-control" type="text" name="price" th:value="${contact.phone}">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label"> email : </label>
+                        <input class="form-control" type="text" name="price" th:value="${contact.email}">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label"> adresse : </label>
+                        <input class="form-control" type="text" name="price" th:value="${contact.address}">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label"> Catégorie : </label>
+                        <select class="form-control" name="category" th:value="${contact.category}">
+                            <option
+                                    th:each="category : ${categories}"
+                                    th:value="${category.id}"
+                                    th:text="${category.categoryName}"
+                                    th:selected="${contact.category.id==category.id}">
+                            </option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

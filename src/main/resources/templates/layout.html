@@ -25,16 +25,14 @@
             <li sec:authorize="hasRole('ROLE_ADMIN')">
                 <a th:href="@{/article}">Article</a>
             </li>
-<!--            <li>-->
-<!--                <a th:href="@{/vcart}" class="fa fa-shopping-cart" th:text="${nbcart}"> </a>-->
-<!--            </li>-->
+
         </ul>
 
-<!--        <ul class="nav navbar-nav pull-right">-->
-<!--            <li>-->
-<!--                <a th:href="@{/logout}" class="fas fa-sign-in-alt" th:text="${username}"></a>-->
-<!--            </li>-->
-<!--        </ul>-->
+        <ul class="nav navbar-nav pull-right">
+            <li>
+                <a th:href="@{/logout}" class="fas fa-sign-in-alt" th:text="${username}"></a>
+            </li>
+        </ul>
 
     </div>
 </nav>
