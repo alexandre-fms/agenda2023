@@ -15,7 +15,7 @@
 <body>
 <div layout:fragment="content">
     <div class="col-md-4 col-xs-8">
-        <div class="panel panel-default">
+        <div class="panel panel-primary">
             <div class="panel-heading">Mettre à jour un contact</div>
             <div class="panel-body">
                 <form th:action="@{/save}" method="post">
@@ -45,14 +45,12 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label"> Catégorie : </label>
-                        <select class="form-control" name="category" th:value="${contact.category}">
-                            <option
-                                    th:each="category : ${categories}"
-                                    th:value="${category.id}"
-                                    th:text="${category.categoryName}"
-                                    th:selected="${contact.category.id==category.id}">
-                            </option>
+
+                        <select class="form-control" name="category">
+                            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.categoryName}" th:selected="${contact.category.id==category.id}"></option>
                         </select>
+
+
                     </div>
                     <button type="submit" class="btn btn-primary">Update</button>
                 </form>

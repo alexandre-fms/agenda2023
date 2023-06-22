@@ -25,7 +25,7 @@ public class IntBusinessImpl implements IntBusiness{
 
     @Override
     public Page<Contact> getContactsPages(String kw, int page) {
-        return contactRepository.findByFirstnameContains(kw , PageRequest.of(page, 5));
+        return contactRepository.findByNameContains(kw , PageRequest.of(page, 5));
     }
 
     @Override
